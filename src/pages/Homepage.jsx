@@ -3,7 +3,6 @@ import Particles from "../components/Particles";
 const Homepage = () => {
     return (
         <>
-            {/* Hero Section */}
             <section
                 style={{
                     width: "100%",
@@ -14,19 +13,15 @@ const Homepage = () => {
             >
                 <Particles
                     particleColors={["#ffffff", "#ffffff"]}
-                    particleCount={200}
-                    particleSpread={10}
-                    speed={0.1}
+                    particleCount={1500}
+                    particleSpread={15}
+                    speed={0.2}
                     particleBaseSize={100}
                     moveParticlesOnHover={true}
                     alphaParticles={false}
                     disableRotation={false}
                 />
 
-                {/* Hero Content */}
-                <div style={{ position: "relative", zIndex: 1 }}>
-                    {/* Your name, tagline, buttons */}
-                </div>
             </section>
         </>
     );
