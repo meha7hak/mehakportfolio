@@ -1,0 +1,155 @@
+/* =========================
+   Google Fonts
+========================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+
+/* =========================
+   CSS Variables
+========================= */
+:root {
+  /* Fonts */
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: "Sora", system-ui, sans-serif;
+
+  /* Colors */
+  --bg-primary: #0b0e14;
+  --bg-secondary: #11151f;
+  --text-primary: #e6e6eb;
+  --text-secondary: #9ca3af;
+  --accent: #6c63ff;
+  --accent-hover: #857dff;
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* Typography */
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   Global Reset
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   Body
+========================= */
+body {
+  background: radial-gradient(1200px 600px at 20% -10%,
+      rgba(108, 99, 255, 0.12),
+      transparent 60%),
+    var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* =========================
+   Typography
+========================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+p {
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 65ch;
+}
+
+/* =========================
+   Links
+========================= */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================
+   Buttons
+========================= */
+button {
+  font-family: var(--font-body);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  padding: 0.65em 1.4em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.01));
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(108, 99, 255, 0.4);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.6);
+}
+
+/* =========================
+   Utility (Optional)
+========================= */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
