@@ -12,12 +12,12 @@ const Intro = ({ onEnter }) => {
         >
             {/* Background */}
             <GridScan
-                sensitivity={0.55}
+                sensitivity={0.5}
                 lineThickness={1}
-                linesColor="#392e4e"
+                linesColor="#EA7B7B"
                 gridScale={0.1}
-                scanColor="#FF9FFC"
-                scanOpacity={0.4}
+                scanColor="#D25353"
+                scanOpacity={0.2}
                 enablePost
                 bloomIntensity={0.6}
                 chromaticAberration={0.002}

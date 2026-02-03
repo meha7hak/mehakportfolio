@@ -16,8 +16,8 @@
   --bg-secondary: #11151f;
   --text-primary: #e6e6eb;
   --text-secondary: #9ca3af;
-  --accent: #6c63ff;
-  --accent-hover: #857dff;
+  --accent: #D25353;
+  --accent-hover: #EA7B7B;
   --border-color: rgba(255, 255, 255, 0.08);
 
   /* Radius */
@@ -135,12 +135,12 @@ button {
 
 button:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(203, 34, 211, 0.4);
+  box-shadow: 0 0 0 1px rgba(144, 14, 70, 0.6);
 }
 
 button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(144, 14, 70, 0.6);
 }
 
 /* =========================
