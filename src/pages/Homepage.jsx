@@ -1,6 +1,7 @@
 import { useRef, Component } from "react";
 import Particles from "../components/Particles";
 import LaserFlow from "../components/LaserFlow";
+import PixelTransition from "../components/PixelTransition";
 import "./Homepage.css";
 
 class LaserFlowErrorBoundary extends Component {
@@ -46,7 +47,7 @@ const Homepage = () => {
                     const el = laserWrapRef.current;
                     if (el) {
                         el.style.setProperty("--mx", `${x}px`);
-                        el.style.setProperty("--my", `${y + rect.height * 0.5}px`);
+                        el.style.setProperty("--my", `${y}px`);
                     }
                 }}
                 onMouseLeave={() => {
@@ -59,44 +60,90 @@ const Homepage = () => {
             >
                 <LaserFlowErrorBoundary>
                     <LaserFlow
-                        horizontalBeamOffset={0.1}
-                        verticalBeamOffset={0.0}
-                        color="#CF9EFF"
-                        horizontalSizing={0.5}
-                        verticalSizing={2}
-                        wispDensity={1}
-                        wispSpeed={15}
-                        wispIntensity={5}
-                        flowSpeed={0.35}
-                        flowStrength={0.25}
-                        fogIntensity={0.45}
-                        fogScale={0.3}
-                        fogFallSpeed={0.6}
-                        decay={1.1}
-                        falloffStart={1.2}
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-                    >
-                        {/* No text content inside LaserFlow – photo is in the bordered card on the left */}
-                    </LaserFlow>
+  horizontalBeamOffset={0.96}     // right side
+  verticalBeamOffset={0.5}
+
+  color="#CF9EFF"
+
+  horizontalSizing={0.45}
+  verticalSizing={2.0}
+
+  wispDensity={2}
+  wispSpeed={6}
+  wispIntensity={10}
+
+  flowSpeed={0.6}
+  flowStrength={0.8}
+
+  fogIntensity={1.2}
+  fogScale={0.6}
+  fogFallSpeed={1.2}
+
+  decay={0.3}                    // FAST startup
+
+  falloffStart={1.0}
+
+  style={{
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+  }}
+>
+</LaserFlow>
                 </LaserFlowErrorBoundary>
             </div>
 
-            {/* Bordered content area: your picture on the left, no text content */}
             <div className="homepage-content-border">
                 <div className="homepage-content-inner">
-                    <div className="homepage-photo-left">
-                        <img
-                            src="/mehak.jpeg"
-                            alt="Mehak"
-                            style={{
+                    <PixelTransition
+                        firstContent={
+                            <div className="homepage-photo-left" style={{
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
-                                objectPosition: "center",
-                                borderRadius: "var(--radius-md, 14px)",
-                            }}
-                        />
-                    </div>
+                                overflow: "hidden",
+                                borderRadius: "var(--radius-md, 14px)"
+                            }}>
+                                <img
+                                    src="/mehak.jpeg"
+                                    alt="Mehak"
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "cover",
+                                        objectPosition: "center",
+                                        display: "block"
+                                    }}
+                                />
+                            </div>
+                        }
+                        secondContent={
+                            <div className="homepage-photo-left" style={{
+                                width: "100%",
+                                height: "100%",
+                                overflow: "hidden",
+                                borderRadius: "var(--radius-md, 14px)"
+                            }}>
+                                <img
+                                    src="/mehak.jpeg"
+                                    alt="Mehak"
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "cover",
+                                        objectPosition: "center",
+                                        filter: "grayscale(100%)",
+                                        display: "block"
+                                    }}
+                                />
+                            </div>
+                        }
+                        gridSize={8}
+                        pixelColor='#ffffff'
+                        once={false}
+                        animationStepDuration={0.4}
+                        className="pixel-transition-container"
+                    />
                 </div>
             </div>
         </section>

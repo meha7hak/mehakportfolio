@@ -65,26 +65,29 @@
   z-index: 1;
   flex: 1;
   display: flex;
-  align-items: stretch;
-  padding: 1.75rem 2rem;
+  justify-content: flex-start; /* Align to the left */
+  align-items: center; /* Center vertically */
+  padding: 1.75rem 1.75rem 1.75rem 3rem; /* More padding on the left */
   min-height: 0;
+  width: 100%;
 }
 
 /* Your picture on the left (replaces the old sidebar) */
 .homepage-photo-left {
-  width: 220px;
-  min-width: 180px;
-  max-width: 28%;
+  width: 100%;
+  max-width: 500px; /* Increased max-width */
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-md, 14px);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 0; /* Remove any default margins */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .homepage-photo-left {
-    width: 160px;
-    max-width: 40%;
+    width: 250px;
+    min-width: 60%;
+    max-width: 80%;
   }
 }
