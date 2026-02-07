@@ -60,37 +60,39 @@ const Homepage = () => {
             >
                 <LaserFlowErrorBoundary>
                     <LaserFlow
-  horizontalBeamOffset={0.96}     // right side
-  verticalBeamOffset={0.5}
+                        horizontalBeamOffset={-0.48}    // Start from top-left (left edge of border)
+                        verticalBeamOffset={0.12}       // End/Flare at top border of content
+                        color="#CF9EFF"
 
-  color="#CF9EFF"
+                        horizontalSizing={0.25}         // Perfect width beam
+                        verticalSizing={3.2}            // Full height beam with slight overflow
 
-  horizontalSizing={0.45}
-  verticalSizing={2.0}
+                        wispDensity={0.8}               // Minimal wisps for cleaner look
+                        wispSpeed={2.5}                 // Very slow, subtle wisp movement
+                        wispIntensity={15}              // Strong but controlled wisp presence
 
-  wispDensity={2}
-  wispSpeed={6}
-  wispIntensity={10}
+                        flowSpeed={0.15}                // Very slow, smooth flow
+                        flowStrength={1.0}              // Maximum flow strength
 
-  flowSpeed={0.6}
-  flowStrength={0.8}
+                        fogIntensity={1.8}              // Strong, dense fog
+                        fogScale={0.25}                 // Very fine fog particles
+                        fogFallSpeed={0.3}              // Slow, controlled fog fall
 
-  fogIntensity={1.2}
-  fogScale={0.6}
-  fogFallSpeed={1.2}
+                        decay={0.5}                     // Very sharp decay
+                        falloffStart={0.85}             // Immediate falloff
 
-  decay={0.3}                    // FAST startup
-
-  falloffStart={1.0}
-
-  style={{
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-  }}
->
-</LaserFlow>
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            width: "100%",
+                            height: "100%",
+                            pointerEvents: "none"
+                        }}
+                    >
+                    </LaserFlow>
                 </LaserFlowErrorBoundary>
             </div>
 
