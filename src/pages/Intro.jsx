@@ -8,6 +8,7 @@ const Intro = ({ onEnter }) => {
                 width: "100%",
                 height: "100vh",
                 overflow: "hidden",
+                backgroundColor: "var(--bg-primary, #0b0e14)",
             }}
         >
             {/* Background */}

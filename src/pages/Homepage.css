@@ -1,0 +1,90 @@
+/* Homepage: LaserFlow background + bordered content area */
+
+.homepage-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #060010;
+}
+
+/* 1. Particles in the back */
+.homepage-particles-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* 2. LaserFlow on top of particles – also above content card so beam isn’t cut off */
+.homepage-laser-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none; /* allow clicks to pass through to the content card */
+}
+
+/* Bordered content container (glowing purple border, dot grid) */
+.homepage-content-border {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 94%;
+  max-width: 1200px;
+  height: 62%;
+  min-height: 320px;
+  background-color: rgba(6, 0, 16, 0.85);
+  border: 2px solid rgba(255, 121, 198, 0.7);
+  border-radius: 20px;
+  box-shadow:
+    0 0 20px rgba(207, 158, 255, 0.15),
+    0 0 40px rgba(255, 121, 198, 0.08),
+    inset 0 0 60px rgba(0, 0, 0, 0.3);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Subtle dot grid background inside the border */
+.homepage-content-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.homepage-content-inner {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  padding: 1.75rem 2rem;
+  min-height: 0;
+}
+
+/* Your picture on the left (replaces the old sidebar) */
+.homepage-photo-left {
+  width: 220px;
+  min-width: 180px;
+  max-width: 28%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md, 14px);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .homepage-photo-left {
+    width: 160px;
+    max-width: 40%;
+  }
+}

@@ -311,6 +311,8 @@ export const GridScan = ({
 
     const [modelsReady, setModelsReady] = useState(false);
     const [uiFaceActive, setUiFaceActive] = useState(false);
+    const [initError, setInitError] = useState(null);
+    const [layoutTick, setLayoutTick] = useState(0);
 
     const lookTarget = useRef(new THREE.Vector2(0, 0));
     const tiltTarget = useRef(0);
@@ -418,18 +420,28 @@ export const GridScan = ({
     }, [uiFaceActive, snapBackDelay, scanOnClick, enableGyro]);
 
     useEffect(() => {
+        setInitError(null);
         const container = containerRef.current;
         if (!container) return;
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        rendererRef.current = renderer;
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMapping = THREE.NoToneMapping;
-        renderer.autoClear = false;
-        renderer.setClearColor(0x000000, 0);
-        container.appendChild(renderer.domElement);
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        if (w <= 0 || h <= 0) {
+            const raf = requestAnimationFrame(() => setLayoutTick(t => t + 1));
+            return () => cancelAnimationFrame(raf);
+        }
+
+        let cleanup = () => {};
+        try {
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            rendererRef.current = renderer;
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            renderer.setSize(w, h);
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.toneMapping = THREE.NoToneMapping;
+            renderer.autoClear = false;
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
 
         const uniforms = {
             iResolution: {
@@ -555,19 +567,30 @@ export const GridScan = ({
         };
         rafRef.current = requestAnimationFrame(tick);
 
-        return () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
-            window.removeEventListener('resize', onResize);
-            material.dispose();
-            quad.geometry.dispose();
+            cleanup = () => {
+                if (rafRef.current) cancelAnimationFrame(rafRef.current);
+                window.removeEventListener('resize', onResize);
+                material.dispose();
+                quad.geometry.dispose();
 
-            if (composerRef.current) {
-                composerRef.current.dispose();
-                composerRef.current = null;
+                if (composerRef.current) {
+                    composerRef.current.dispose();
+                    composerRef.current = null;
+                }
+                renderer.dispose();
+                if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
+            };
+        } catch (err) {
+            setInitError(err);
+            if (rendererRef.current) {
+                try {
+                    rendererRef.current.dispose();
+                    if (container.contains(rendererRef.current.domElement)) container.removeChild(rendererRef.current.domElement);
+                } catch (_) {}
+                rendererRef.current = null;
             }
-            renderer.dispose();
-            container.removeChild(renderer.domElement);
-        };
+        }
+        return cleanup;
     }, [
         sensitivity,
         lineThickness,
@@ -594,7 +617,8 @@ export const GridScan = ({
         skewScale,
         yBoost,
         tiltScale,
-        yawScale
+        yawScale,
+        layoutTick
     ]);
 
     useEffect(() => {
@@ -787,6 +811,11 @@ export const GridScan = ({
 
     return (
         <div ref={containerRef} className={`gridscan${className ? ` ${className}` : ''}`} style={style}>
+            {initError && (
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', display: 'grid', placeItems: 'center', fontSize: '0.9rem', color: '#ccc' }}>
+                    Grid effect unavailable
+                </div>
+            )}
             {showPreview && (
                 <div className="gridscan__preview">
                     <video ref={videoRef} muted playsInline autoPlay className="gridscan__video" />
