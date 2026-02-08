@@ -1,4 +1,5 @@
 import GridScan from "../components/GridScan";
+import FuzzyText from "../components/Fuzzy";
 
 const Intro = ({ onEnter }) => {
     return (
@@ -42,7 +43,14 @@ const Intro = ({ onEnter }) => {
                     textAlign: "center",
                 }}
             >
-                <h1>Signal Received!</h1>
+                <FuzzyText
+                    baseIntensity={0.2}
+                    hoverIntensity={0.5}
+                    enableHover
+                    fontSize="clamp(2rem, 5vw, 4rem)"
+                >
+                    Signal Received!
+                </FuzzyText>
                 <button onClick={onEnter}>Proceed</button>
             </div>
         </section>
