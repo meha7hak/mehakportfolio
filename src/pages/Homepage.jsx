@@ -40,6 +40,7 @@ const Homepage = () => {
             <div
                 ref={laserWrapRef}
                 className="homepage-laser-wrap"
+                style={{ zIndex: 5 }}
                 onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const x = e.clientX - rect.left;
