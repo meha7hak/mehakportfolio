@@ -40,7 +40,7 @@ const Homepage = () => {
             <div
                 ref={laserWrapRef}
                 className="homepage-laser-wrap"
-                style={{ zIndex: 5 }}
+                style={{ zIndex: 4 }}
                 onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const x = e.clientX - rect.left;
@@ -61,7 +61,7 @@ const Homepage = () => {
             >
                 <LaserFlowErrorBoundary>
                     <LaserFlow
-                        horizontalBeamOffset={-0.18}
+                        horizontalBeamOffset={0.15}
                         verticalBeamOffset={0.12}
                         color="#CF9EFF"
 
@@ -75,8 +75,8 @@ const Homepage = () => {
                         flowSpeed={0.35}
                         flowStrength={0.25}
 
-                        fogIntensity={0.45}
-                        fogScale={0.3}
+                        fogIntensity={0.14}
+                        fogScale={0.18}
                         fogFallSpeed={0.6}
 
                         decay={1.1}
