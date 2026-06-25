@@ -20,7 +20,8 @@
   position: absolute;
   inset: 0;
   z-index: 10;
-  pointer-events: none; /* allow clicks to pass through to the content card */
+  pointer-events: none;
+  /* allow clicks to pass through to the content card */
 }
 
 /* Bordered content container (glowing purple border, dot grid) */
@@ -51,11 +52,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.04) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle at center,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
 }
@@ -65,9 +64,10 @@
   z-index: 1;
   flex: 1;
   display: flex;
-  justify-content: flex-start; /* Align to the left */
-  align-items: center; /* Center vertically */
-  padding: 1.75rem 1.75rem 1.75rem 3rem; /* More padding on the left */
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem 2rem 2rem 3.5rem;
+  gap: 3.5rem;
   min-height: 0;
   width: 100%;
 }
@@ -75,19 +75,106 @@
 /* Your picture on the left (replaces the old sidebar) */
 .homepage-photo-left {
   width: 100%;
-  max-width: 500px; /* Increased max-width */
+  max-width: 500px;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-md, 14px);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  margin: 0; /* Remove any default margins */
+  margin: 0;
+}
+
+/* Welcome container and text style */
+.homepage-welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 1.5rem;
+}
+
+.homepage-welcome::-webkit-scrollbar {
+  width: 6px;
+}
+
+.homepage-welcome::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.homepage-welcome::-webkit-scrollbar-thumb {
+  background: rgba(207, 158, 255, 0.25);
+  border-radius: 3px;
+}
+
+.homepage-welcome::-webkit-scrollbar-thumb:hover {
+  background: rgba(207, 158, 255, 0.45);
+}
+
+.homepage-welcome-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #f1eef0 0%, #ebe8ee 50%, #e6eced 100%);
+  -webkit-background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(189, 147, 249, 0.15);
+}
+
+.homepage-welcome-desc {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 62ch;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
+  .homepage-content-border {
+    height: auto;
+    max-height: 85%;
+    bottom: 2%;
+    min-height: auto;
+  }
+
+  .homepage-content-inner {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+  }
+
   .homepage-photo-left {
-    width: 250px;
-    min-width: 60%;
-    max-width: 80%;
+    width: 160px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .homepage-welcome {
+    align-items: center;
+    text-align: center;
+    margin-top: 0.5rem;
+    overflow-y: visible;
+    padding-right: 0;
+    max-height: none;
+  }
+
+  .homepage-welcome-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.8rem;
+  }
+
+  .homepage-welcome-desc {
+    font-size: 0.95rem;
   }
 }

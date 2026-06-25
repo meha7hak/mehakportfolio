@@ -2,6 +2,7 @@ import { useRef, Component } from "react";
 import Particles from "../components/Particles";
 import LaserFlow from "../components/LaserFlow";
 import PixelTransition from "../components/PixelTransition";
+import ShuffleText from "../components/ShuffleText";
 import "./Homepage.css";
 
 class LaserFlowErrorBoundary extends Component {
@@ -144,6 +145,26 @@ const Homepage = () => {
                         animationStepDuration={0.4}
                         className="pixel-transition-container"
                     />
+
+                    <div className="homepage-welcome">
+
+                        <ShuffleText
+                            text="Hi, I'm Mehak!"
+                            as="h1"
+                            className="homepage-welcome-title"
+                            trigger="both"
+                            delay={200}
+                            speed={1.2}
+                        />
+                        <ShuffleText
+                            text="A passionate developer pouring my imagination and creativity into my work."
+                            as="p"
+                            className="homepage-welcome-desc"
+                            trigger="both"
+                            delay={700}
+                            speed={1.8}
+                        />
+                    </div>
                 </div>
             </div>
         </section>
