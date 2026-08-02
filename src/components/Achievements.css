@@ -1,0 +1,103 @@
+/* Achievements Section */
+.achievements-section {
+  width: 100%;
+  padding: 5rem 2rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.achievements-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.achievement-card {
+  background: rgba(11, 14, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 2.2rem 1.75rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #cf9eff, #ff79dc);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(207, 158, 255, 0.4);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(207, 158, 255, 0.15);
+}
+
+.achievement-card:hover::before {
+  opacity: 1;
+}
+
+.achievement-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(207, 158, 255, 0.12);
+  border: 1px solid rgba(207, 158, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cf9eff;
+  margin-bottom: 1.5rem;
+}
+
+.achievement-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.achievement-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  .achievements-section {
+    padding: 4rem 1.25rem;
+  }
+}

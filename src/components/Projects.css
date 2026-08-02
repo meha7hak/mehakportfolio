@@ -1,0 +1,211 @@
+/* Projects Section */
+.projects-section {
+  width: 100%;
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+/* Sticky Showcase Container */
+.projects-showcase-container {
+  position: relative;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-nav-tabs {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  background: rgba(11, 14, 20, 0.8);
+  padding: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-tab-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-tab-btn.active {
+  background: linear-gradient(135deg, rgba(207, 158, 255, 0.25) 0%, rgba(255, 121, 198, 0.25) 100%);
+  border: 1px solid rgba(207, 158, 255, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(207, 158, 255, 0.2);
+}
+
+.project-tab-btn:hover:not(.active) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Project Card */
+.project-card {
+  width: 100%;
+  background: rgba(11, 14, 20, 0.85);
+  border: 1px solid rgba(207, 158, 255, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(207, 158, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+}
+
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.04);
+}
+
+.project-content {
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffffff 0%, #cf9eff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.project-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tech-tag {
+  padding: 0.3rem 0.8rem;
+  background: rgba(207, 158, 255, 0.1);
+  border: 1px solid rgba(207, 158, 255, 0.25);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #cf9eff;
+  font-weight: 500;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-project {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-github {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.btn-github:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-demo {
+  background: linear-gradient(135deg, #cf9eff 0%, #ff79dc 100%);
+  border: none;
+  color: #060010;
+  box-shadow: 0 4px 15px rgba(207, 158, 255, 0.3);
+}
+
+.btn-demo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 121, 198, 0.5);
+  color: #060010;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+  .project-image-wrap {
+    min-height: 250px;
+    max-height: 300px;
+  }
+  .project-content {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .projects-section {
+    padding: 4rem 1.25rem;
+  }
+  .project-buttons {
+    flex-direction: column;
+  }
+  .btn-project {
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+  }
+}

@@ -1,197 +1,73 @@
-import { useRef, Component } from "react";
+import { useEffect, useRef } from "react";
+import Lenis from "lenis";
 import Particles from "../components/Particles";
-import LaserFlow from "../components/LaserFlow";
-import PixelTransition from "../components/PixelTransition";
-import ShuffleText from "../components/ShuffleText";
-import GooeyNav from "../components/GooeyNav";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Skills from "../components/Skills";
+import Projects from "../components/Projects";
+import Achievements from "../components/Achievements";
+import Resume from "../components/Resume";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 import "./Homepage.css";
 
-class LaserFlowErrorBoundary extends Component {
-    state = { hasError: false };
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-    render() {
-        if (this.state.hasError) {
-            return <div className="homepage-laser-wrap" style={{ background: "transparent" }} />;
-        }
-        return this.props.children;
-    }
-}
-
 const Homepage = () => {
-    const laserWrapRef = useRef(null);
+  const lenisRef = useRef(null);
 
-    const items = [
-        { label: "Home", href: "#" },
-        { label: "About", href: "#" },
-        { label: "Projects", href: "#" },
-        { label: "Contact", href: "#" },
+  useEffect(() => {
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+    lenisRef.current = lenis;
 
-    ];
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
-    return (
-        <section className="homepage-section">
-            {/* Top Gooey Navbar */}
-            <header className="top-navbar-header">
-                <GooeyNav
-                    items={items}
-                    particleCount={15}
-                    particleDistances={[90, 10]}
-                    particleR={100}
-                    initialActiveIndex={0}
-                    animationTime={600}
-                    timeVariance={300}
-                    colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-                />
-            </header>
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
-            {/* 1. Particles in the back */}
-            <div className="homepage-particles-wrap">
-                <Particles
-                    particleColors={["#ffffff", "#ffffff"]}
-                    particleCount={1500}
-                    particleSpread={15}
-                    speed={0.2}
-                    particleBaseSize={100}
-                    moveParticlesOnHover={true}
-                    alphaParticles={false}
-                    disableRotation={false}
-                />
-            </div>
+  return (
+    <main className="homepage-main">
+      {/* Top Navbar */}
+      <Navbar lenisRef={lenisRef} />
 
-            {/* 2. LaserFlow on top of particles, with image card inside its container */}
-            <div
-                ref={laserWrapRef}
-                className="homepage-laser-wrap"
-                style={{ zIndex: 4 }}
-                onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const el = laserWrapRef.current;
-                    if (el) {
-                        el.style.setProperty("--mx", `${x}px`);
-                        el.style.setProperty("--my", `${y}px`);
-                    }
-                }}
-                onMouseLeave={() => {
-                    const el = laserWrapRef.current;
-                    if (el) {
-                        el.style.setProperty("--mx", "-9999px");
-                        el.style.setProperty("--my", "-9999px");
-                    }
-                }}
-            >
-                <LaserFlowErrorBoundary>
-                    <LaserFlow
-                        horizontalBeamOffset={0.15}
-                        verticalBeamOffset={0.12}
-                        color="#CF9EFF"
+      {/* 1. Background Particles fixed layer */}
+      <div className="homepage-particles-fixed">
+        <Particles
+          particleColors={["#ffffff", "#cf9eff", "#ff79dc"]}
+          particleCount={1200}
+          particleSpread={15}
+          speed={0.2}
+          particleBaseSize={90}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
 
-                        horizontalSizing={0.5}
-                        verticalSizing={5}
-
-                        wispDensity={1}
-                        wispSpeed={15}
-                        wispIntensity={5}
-
-                        flowSpeed={0.35}
-                        flowStrength={0.25}
-
-                        fogIntensity={0.14}
-                        fogScale={0.18}
-                        fogFallSpeed={0.6}
-
-                        decay={1.1}
-                        falloffStart={1.2}
-
-                        style={{
-                            position: "absolute",
-                            inset: 0,
-                            width: "100%",
-                            height: "100%",
-                            pointerEvents: "none",
-                        }}
-                    >
-                    </LaserFlow>
-                </LaserFlowErrorBoundary>
-            </div>
-
-            <div className="homepage-content-border">
-                <div className="homepage-content-inner">
-                    <PixelTransition
-                        firstContent={
-                            <div className="homepage-photo-left" style={{
-                                width: "100%",
-                                height: "100%",
-                                overflow: "hidden",
-                                borderRadius: "var(--radius-md, 14px)"
-                            }}>
-                                <img
-                                    src="/mehak.jpeg"
-                                    alt="Mehak"
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                        display: "block"
-                                    }}
-                                />
-                            </div>
-                        }
-                        secondContent={
-                            <div className="homepage-photo-left" style={{
-                                width: "100%",
-                                height: "100%",
-                                overflow: "hidden",
-                                borderRadius: "var(--radius-md, 14px)"
-                            }}>
-                                <img
-                                    src="/mehak.jpeg"
-                                    alt="Mehak"
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                        filter: "grayscale(100%)",
-                                        display: "block"
-                                    }}
-                                />
-                            </div>
-                        }
-                        gridSize={8}
-                        pixelColor='#ffffff'
-                        once={false}
-                        animationStepDuration={0.4}
-                        className="pixel-transition-container"
-                    />
-
-                    <div className="homepage-welcome">
-
-                        <ShuffleText
-                            text="Hi, I'm Mehak!"
-                            as="h1"
-                            className="homepage-welcome-title"
-                            trigger="both"
-                            delay={200}
-                            speed={1.2}
-                        />
-                        <ShuffleText
-                            text="I'm a Full Stack Developer who enjoys building modern, responsive, and scalable web applications. From crafting intuitive user interfaces to developing robust backend systems, I love turning ideas into real-world products."
-                            as="p"
-                            className="homepage-welcome-desc"
-                            trigger="both"
-                            delay={700}
-                            speed={1.8}
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+      {/* Content Sections */}
+      <div className="homepage-content-wrapper">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Achievements />
+        <Resume />
+        <Contact />
+        <Footer />
+      </div>
+    </main>
+  );
 };
 
 export default Homepage;
