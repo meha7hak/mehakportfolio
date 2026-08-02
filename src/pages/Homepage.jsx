@@ -3,6 +3,7 @@ import Particles from "../components/Particles";
 import LaserFlow from "../components/LaserFlow";
 import PixelTransition from "../components/PixelTransition";
 import ShuffleText from "../components/ShuffleText";
+import GooeyNav from "../components/GooeyNav";
 import "./Homepage.css";
 
 class LaserFlowErrorBoundary extends Component {
@@ -21,8 +22,30 @@ class LaserFlowErrorBoundary extends Component {
 const Homepage = () => {
     const laserWrapRef = useRef(null);
 
+    const items = [
+        { label: "Home", href: "#" },
+        { label: "About", href: "#" },
+        { label: "Projects", href: "#" },
+        { label: "Contact", href: "#" },
+
+    ];
+
     return (
         <section className="homepage-section">
+            {/* Top Gooey Navbar */}
+            <header className="top-navbar-header">
+                <GooeyNav
+                    items={items}
+                    particleCount={15}
+                    particleDistances={[90, 10]}
+                    particleR={100}
+                    initialActiveIndex={0}
+                    animationTime={600}
+                    timeVariance={300}
+                    colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+                />
+            </header>
+
             {/* 1. Particles in the back */}
             <div className="homepage-particles-wrap">
                 <Particles
@@ -157,7 +180,7 @@ const Homepage = () => {
                             speed={1.2}
                         />
                         <ShuffleText
-                            text="A passionate developer pouring my imagination and creativity into my work."
+                            text="I'm a Full Stack Developer who enjoys building modern, responsive, and scalable web applications. From crafting intuitive user interfaces to developing robust backend systems, I love turning ideas into real-world products."
                             as="p"
                             className="homepage-welcome-desc"
                             trigger="both"

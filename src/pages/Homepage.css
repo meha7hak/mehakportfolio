@@ -8,6 +8,29 @@
   background-color: #060010;
 }
 
+/* Top Navbar Header Container */
+.top-navbar-header {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  background: rgba(11, 14, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(207, 158, 255, 0.25);
+  border-radius: 9999px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(207, 158, 255, 0.15);
+  max-width: 92vw;
+  transition: all 0.3s ease;
+}
+
 /* 1. Particles in the back */
 .homepage-particles-wrap {
   position: absolute;
@@ -23,6 +46,7 @@
   pointer-events: none;
   /* allow clicks to pass through to the content card */
 }
+
 
 /* Bordered content container (glowing purple border, dot grid) */
 .homepage-content-border {
