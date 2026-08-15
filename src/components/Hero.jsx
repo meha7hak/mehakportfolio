@@ -1,7 +1,8 @@
-import { useRef, Component } from "react";
+/* eslint-disable no-unused-vars */
+import { useRef, useState, Component } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LaserFlow from "./LaserFlow";
-import PixelTransition from "./PixelTransition";
+import Lanyard from "./Lanyard";
 import ShuffleText from "./ShuffleText";
 import "./Hero.css";
 
@@ -20,9 +21,54 @@ class LaserFlowErrorBoundary extends Component {
   }
 }
 
+class LanyardErrorBoundary extends Component {
+  state = { hasError: false };
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("Lanyard Error caught in boundary:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+const checkWebGL = () => {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch (e) {
+    return false;
+  }
+};
+
+const LanyardFallback = () => (
+  <div className="homepage-photo-left">
+    <img
+      src="/mehak.jpeg"
+      alt="Mehak"
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: "center",
+        display: "block",
+      }}
+    />
+  </div>
+);
+
 const Hero = () => {
   const heroRef = useRef(null);
   const laserWrapRef = useRef(null);
+  const [hasWebGL] = useState(() => checkWebGL());
 
   // Framer motion scroll values relative to hero section
   const { scrollYProgress } = useScroll({
@@ -98,61 +144,22 @@ const Hero = () => {
       {/* Bordered content container */}
       <div className="homepage-content-border">
         <div className="homepage-content-inner">
-          <motion.div style={{ scale: imageScale, x: imageX, width: "100%", maxWidth: "500px", aspectRatio: "3 / 4" }}>
-            <PixelTransition
-              firstContent={
-                <div
-                  className="homepage-photo-left"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    overflow: "hidden",
-                    borderRadius: "var(--radius-md, 14px)",
-                  }}
-                >
-                  <img
-                    src="/mehak.jpeg"
-                    alt="Mehak"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      objectPosition: "center",
-                      display: "block",
-                    }}
-                  />
-                </div>
-              }
-              secondContent={
-                <div
-                  className="homepage-photo-left"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    overflow: "hidden",
-                    borderRadius: "var(--radius-md, 14px)",
-                  }}
-                >
-                  <img
-                    src="/mehak.jpeg"
-                    alt="Mehak"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      objectPosition: "center",
-                      filter: "grayscale(100%)",
-                      display: "block",
-                    }}
-                  />
-                </div>
-              }
-              gridSize={8}
-              pixelColor="#ffffff"
-              once={false}
-              animationStepDuration={0.4}
-              className="pixel-transition-container"
-            />
+          <motion.div
+            className="hero-lanyard-container"
+            style={{ scale: imageScale, x: imageX }}
+          >
+            {hasWebGL ? (
+              <LanyardErrorBoundary fallback={<LanyardFallback />}>
+                <Lanyard
+                  position={[0, 0, 22]}
+                  gravity={[0, -40, 0]}
+                  frontImage="/mehak.jpeg"
+                  imageFit="cover"
+                />
+              </LanyardErrorBoundary>
+            ) : (
+              <LanyardFallback />
+            )}
           </motion.div>
 
           <motion.div

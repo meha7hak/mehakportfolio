@@ -131,6 +131,18 @@
   margin: 0;
 }
 
+.hero-lanyard-container {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .homepage-content-border {
     height: auto;
@@ -152,6 +164,13 @@
     width: 160px;
     max-width: 100%;
     aspect-ratio: 1 / 1;
+  }
+
+  .hero-lanyard-container {
+    width: 240px;
+    max-width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: visible;
   }
 
   .homepage-welcome {
