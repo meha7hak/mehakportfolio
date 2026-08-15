@@ -3,7 +3,8 @@ import { useRef, useState, Component } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LaserFlow from "./LaserFlow";
 import Lanyard from "./Lanyard";
-import ShuffleText from "./ShuffleText";
+import FoldText from "./FoldText";
+import WarpText from "./WarpText";
 import "./Hero.css";
 
 class LaserFlowErrorBoundary extends Component {
@@ -166,21 +167,38 @@ const Hero = () => {
             className="homepage-welcome"
             style={{ y: textY, opacity: textOpacity }}
           >
-            <ShuffleText
-              text="Hi, I'm Mehak!"
-              as="h1"
-              className="homepage-welcome-title"
-              trigger="both"
-              delay={200}
-              speed={1.2}
-            />
-            <ShuffleText
+            <h1 className="homepage-welcome-title">
+              <FoldText
+                text="Hi, I'm Mehak!"
+                splitBy="char"
+                hinge="top"
+                trigger="mount"
+                duration={0.6}
+                stagger={0.04}
+                ease="power3.out"
+                perspective={700}
+                creaseShading={0.5}
+                fontSize="inherit"
+                fontWeight="inherit"
+                color="inherit"
+              />
+            </h1>
+            <WarpText
               text="I'm a Full Stack Developer who enjoys building modern, responsive, and scalable web applications. From crafting intuitive user interfaces to developing robust backend systems, I love turning ideas into real-world products."
-              as="p"
-              className="homepage-welcome-desc"
-              trigger="both"
-              delay={700}
-              speed={1.8}
+              color="#e2d9f3"
+              warpStrength={0.06}
+              warpScale={1.6}
+              speed={0.45}
+              pointerInfluence={0.38}
+              pointerStrength={0.32}
+              refraction={0.014}
+              ripple
+              fontSize="clamp(1rem, 1.4vw, 1.2rem)"
+              fontWeight={400}
+              fontFamily="inherit"
+              letterSpacing="0em"
+              lineHeight={1.6}
+              style={{ width: "100%", height: "150px" }}
             />
           </motion.div>
         </div>
