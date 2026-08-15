@@ -13,7 +13,7 @@ class LaserFlowErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="hero-laser-wrap" style={{ background: "transparent" }} />
+        <div className="homepage-laser-wrap" style={{ background: "transparent" }} />
       );
     }
     return this.props.children;
@@ -44,11 +44,11 @@ const Hero = () => {
 
   return (
     <section id="home" ref={heroRef} className="hero-section">
-      {/* 2. LaserFlow on top of particles */}
+      {/* 2. LaserFlow on top of particles, with image card inside its container */}
       <motion.div
         ref={laserWrapRef}
-        className="hero-laser-wrap"
-        style={{ opacity: laserOpacity }}
+        className="homepage-laser-wrap"
+        style={{ zIndex: 4, opacity: laserOpacity }}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -69,7 +69,7 @@ const Hero = () => {
       >
         <LaserFlowErrorBoundary>
           <LaserFlow
-            horizontalBeamOffset={0.15}
+            horizontalBeamOffset={0.0}
             verticalBeamOffset={0.12}
             color="#CF9EFF"
             horizontalSizing={0.5}
@@ -95,14 +95,14 @@ const Hero = () => {
         </LaserFlowErrorBoundary>
       </motion.div>
 
-      {/* Hero content card */}
-      <div className="hero-content-border">
-        <div className="hero-content-inner">
-          <motion.div style={{ scale: imageScale, x: imageX }}>
+      {/* Bordered content container */}
+      <div className="homepage-content-border">
+        <div className="homepage-content-inner">
+          <motion.div style={{ scale: imageScale, x: imageX, width: "100%", maxWidth: "500px", aspectRatio: "3 / 4" }}>
             <PixelTransition
               firstContent={
                 <div
-                  className="hero-photo-left"
+                  className="homepage-photo-left"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -125,7 +125,7 @@ const Hero = () => {
               }
               secondContent={
                 <div
-                  className="hero-photo-left"
+                  className="homepage-photo-left"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -156,13 +156,13 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="hero-welcome"
+            className="homepage-welcome"
             style={{ y: textY, opacity: textOpacity }}
           >
             <ShuffleText
               text="Hi, I'm Mehak!"
               as="h1"
-              className="hero-welcome-title"
+              className="homepage-welcome-title"
               trigger="both"
               delay={200}
               speed={1.2}
@@ -170,7 +170,7 @@ const Hero = () => {
             <ShuffleText
               text="I'm a Full Stack Developer who enjoys building modern, responsive, and scalable web applications. From crafting intuitive user interfaces to developing robust backend systems, I love turning ideas into real-world products."
               as="p"
-              className="hero-welcome-desc"
+              className="homepage-welcome-desc"
               trigger="both"
               delay={700}
               speed={1.8}
