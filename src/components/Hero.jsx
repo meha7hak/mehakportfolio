@@ -199,7 +199,7 @@ const Hero = () => {
                   color="inherit"
                 />
               </h1>
-              <p className="hero-statement">I BUILD DIGITAL EXPERIENCES.</p>
+              <p className="hero-statement">CRAZY AND CREATIVE DEV.</p>
               <WarpText
                 text="Full Stack Developer focused on building modern, responsive web applications, from intuitive interfaces to scalable backend systems."
                 color="#e2d9f3"
