@@ -1,32 +1,28 @@
-/* Restore Original Hero Layout CSS per original commit 91eb212 */
-
 .hero-section {
   width: 100%;
-  height: 100vh;
+  min-height: 100svh;
   position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: clamp(5.5rem, 12vh, 8rem) clamp(1rem, 3vw, 2rem)
+    clamp(1.5rem, 4vh, 3rem);
   overflow: hidden;
   background-color: #060010;
 }
 
-/* Original LaserFlow Container Hierarchy & CSS */
 .homepage-laser-wrap {
   position: absolute;
   inset: 0;
   z-index: 10;
   pointer-events: none;
-  /* allow clicks to pass through to the content card */
 }
 
-/* Original Bordered content container (glowing purple border, dot grid) */
 .homepage-content-border {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 94%;
+  position: relative;
+  width: min(94vw, 1200px);
   max-width: 1200px;
-  height: 62%;
-  min-height: 320px;
+  min-height: clamp(500px, 62svh, 680px);
   background-color: rgba(6, 0, 16, 0.85);
   border: 2px solid rgba(255, 121, 198, 0.7);
   border-radius: 20px;
@@ -40,7 +36,6 @@
   overflow: hidden;
 }
 
-/* Subtle dot grid background inside the border */
 .homepage-content-border::before {
   content: "";
   position: absolute;
@@ -58,20 +53,55 @@
   position: relative;
   z-index: 1;
   flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 2rem 2rem 2rem 3.5rem;
-  gap: 3.5rem;
-  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(270px, 0.92fr) 1px minmax(0, 1.16fr);
+  align-items: stretch;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  padding: clamp(1.75rem, 3vw, 3rem);
+  min-height: inherit;
   width: 100%;
 }
 
-/* Picture container on the left */
+.hero-visual-zone {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+  min-width: 0;
+}
+
+.hero-identity {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-heading);
+  font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: rgba(241, 238, 240, 0.86);
+}
+
+.hero-divider {
+  width: 1px;
+  min-height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 121, 198, 0.8) 14%,
+    rgba(207, 158, 255, 0.55) 50%,
+    rgba(255, 121, 198, 0.8) 86%,
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(207, 158, 255, 0.35);
+}
+
 .homepage-photo-left {
   width: 100%;
-  max-width: 500px;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   border-radius: var(--radius-md, 14px);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
@@ -79,62 +109,61 @@
   margin: 0;
 }
 
-/* Welcome container and text style */
 .homepage-welcome {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   min-width: 0;
   height: 100%;
-  max-height: 100%;
-  overflow-y: auto;
-  padding-right: 1.5rem;
+  overflow: visible;
 }
 
-.homepage-welcome::-webkit-scrollbar {
-  width: 6px;
+.hero-copy {
+  width: min(100%, 600px);
+  max-width: 600px;
+  padding-top: clamp(0.25rem, 2vh, 1.5rem);
 }
 
-.homepage-welcome::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.homepage-welcome::-webkit-scrollbar-thumb {
-  background: rgba(207, 158, 255, 0.25);
-  border-radius: 3px;
-}
-
-.homepage-welcome::-webkit-scrollbar-thumb:hover {
-  background: rgba(207, 158, 255, 0.45);
+.hero-kicker {
+  margin: 0 0 clamp(0.75rem, 1.8vw, 1.25rem);
+  font-family: var(--font-heading);
+  font-size: clamp(0.74rem, 0.9vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  color: rgba(255, 121, 198, 0.9);
+  text-transform: uppercase;
 }
 
 .homepage-welcome-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: clamp(1.9rem, 3.1vw, 3rem);
   line-height: 1.2;
-  margin-bottom: 1rem;
+  letter-spacing: 0;
+  margin: 0 0 clamp(0.6rem, 1.5vw, 1rem);
   background: linear-gradient(135deg, #f1eef0 0%, #ebe8ee 50%, #e6eced 100%);
   -webkit-background-clip: text;
   background-clip: text;
   text-shadow: 0 0 40px rgba(189, 147, 249, 0.15);
 }
 
-.homepage-welcome-desc {
-  font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 62ch;
-  margin: 0;
+.hero-statement {
+  max-width: 11.5ch;
+  margin: 0 0 clamp(0.8rem, 1.8vw, 1.15rem);
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.98;
+  color: #f8f5ff;
+  text-transform: uppercase;
 }
 
 .hero-lanyard-container {
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 3 / 4;
+  width: min(100%, clamp(260px, 28vw, 440px));
+  height: clamp(360px, 52svh, 560px);
   margin: 0;
   position: relative;
   overflow: visible;
@@ -143,51 +172,228 @@
   align-items: center;
 }
 
-@media (max-width: 768px) {
+.hero-actions {
+  width: min(100%, 600px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(1.25rem, 3vh, 2.25rem);
+  padding-top: clamp(1rem, 2vw, 1.35rem);
+  border-top: 1px solid rgba(226, 217, 243, 0.38);
+}
+
+.hero-social-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 2.25rem);
+}
+
+.hero-social-links a,
+.hero-resume-link {
+  font-family: var(--font-heading);
+  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: rgba(241, 238, 240, 0.9);
+  text-transform: uppercase;
+}
+
+.hero-social-links a:hover,
+.hero-resume-link:hover {
+  color: #ff79c6;
+}
+
+.hero-resume-link {
+  flex: 0 0 auto;
+  min-width: 7.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 121, 198, 0.7);
+  border-radius: 6px;
+  text-align: center;
+  background: rgba(255, 121, 198, 0.08);
+  box-shadow: 0 0 18px rgba(207, 158, 255, 0.14);
+}
+
+.hero-resume-link:hover {
+  border-color: rgba(255, 121, 198, 0.95);
+  background: rgba(255, 121, 198, 0.14);
+}
+
+@media (max-width: 1024px) {
   .homepage-content-border {
-    height: auto;
-    max-height: 85%;
-    bottom: 2%;
-    min-height: auto;
+    min-height: clamp(460px, 60svh, 610px);
   }
 
   .homepage-content-inner {
+    grid-template-columns: minmax(220px, 0.82fr) 1px minmax(0, 1.18fr);
+    gap: clamp(1.1rem, 2.5vw, 2rem);
+    padding: clamp(1.35rem, 2.6vw, 2rem);
+  }
+
+  .hero-lanyard-container {
+    width: min(100%, clamp(220px, 30vw, 330px));
+    height: clamp(320px, 48svh, 450px);
+  }
+
+  .hero-statement {
+    font-size: clamp(2.25rem, 5.3vw, 4rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-section {
+    min-height: auto;
+    align-items: flex-start;
+    padding: clamp(4.85rem, 17vw, 5.8rem) clamp(0.65rem, 3.5vw, 1rem)
+      1.25rem;
+  }
+
+  .homepage-content-border {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    border-radius: 16px;
+  }
+
+  .homepage-content-inner {
+    display: flex;
     flex-direction: column;
-    padding: 2rem 1.5rem;
-    gap: 1.5rem;
+    min-height: 0;
+    padding: clamp(1rem, 4.6vw, 1.35rem);
+    gap: clamp(0.85rem, 3.2vw, 1.15rem);
     justify-content: flex-start;
-    align-items: center;
-    overflow-y: auto;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  .hero-visual-zone {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.55rem;
   }
 
   .homepage-photo-left {
-    width: 160px;
+    width: min(68vw, 230px);
+    height: min(68vw, 230px);
     max-width: 100%;
     aspect-ratio: 1 / 1;
   }
 
   .hero-lanyard-container {
-    width: 240px;
+    width: min(72vw, 250px);
     max-width: 100%;
-    aspect-ratio: 3 / 4;
+    height: clamp(220px, 64vw, 300px);
     overflow: visible;
   }
 
-  .homepage-welcome {
-    align-items: center;
+  .hero-identity {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.55rem;
+    max-width: min(100%, 19rem);
+    writing-mode: horizontal-tb;
+    transform: none;
     text-align: center;
-    margin-top: 0.5rem;
-    overflow-y: visible;
-    padding-right: 0;
-    max-height: none;
+    font-size: clamp(0.66rem, 2.7vw, 0.78rem);
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+  }
+
+  .hero-divider {
+    width: 100%;
+    height: 1px;
+    min-height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 121, 198, 0.85) 15%,
+      rgba(207, 158, 255, 0.55) 50%,
+      rgba(255, 121, 198, 0.85) 85%,
+      transparent
+    );
+  }
+
+  .homepage-welcome {
+    align-items: stretch;
+    text-align: center;
+    height: auto;
+    min-height: 0;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .hero-kicker {
+    margin-bottom: 0.6rem;
+    font-size: clamp(0.68rem, 2.8vw, 0.78rem);
+    line-height: 1.4;
   }
 
   .homepage-welcome-title {
-    margin-bottom: 0.75rem;
-    font-size: 1.8rem;
+    font-size: clamp(1.45rem, 7.4vw, 2.05rem);
+    margin-bottom: 0.55rem;
   }
 
-  .homepage-welcome-desc {
-    font-size: 0.95rem;
+  .hero-statement {
+    max-width: 10.7ch;
+    margin-inline: auto;
+    margin-bottom: 0.75rem;
+    font-size: clamp(2rem, 12vw, 3.15rem);
+    line-height: 1;
+  }
+
+  .homepage-welcome .warp-text {
+    height: clamp(125px, 40vw, 165px) !important;
+  }
+
+  .hero-actions {
+    width: 100%;
+    align-items: flex-end;
+    gap: 0.9rem;
+    margin-top: 0.25rem;
+    padding-top: 0.95rem;
+  }
+
+  .hero-social-links {
+    gap: clamp(0.9rem, 5vw, 1.6rem);
+  }
+
+  .hero-social-links a,
+  .hero-resume-link {
+    font-size: clamp(0.68rem, 2.6vw, 0.78rem);
+    letter-spacing: 0.1em;
+  }
+
+  .hero-resume-link {
+    min-width: clamp(5.8rem, 27vw, 7rem);
+    padding: 0.72rem 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .homepage-content-inner {
+    padding-inline: 0.9rem;
+  }
+
+  .hero-lanyard-container {
+    width: min(70vw, 220px);
+    height: clamp(205px, 62vw, 250px);
+  }
+
+  .hero-actions {
+    gap: 0.65rem;
+  }
+
+  .hero-social-links {
+    gap: 0.8rem;
   }
 }

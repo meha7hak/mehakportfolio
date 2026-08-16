@@ -32,6 +32,7 @@
 .gooey-nav-container {
     position: relative;
     max-width: 100%;
+    min-width: max-content;
 }
 
 .gooey-nav-container nav {
@@ -266,4 +267,4 @@
         padding: 0.4em 0.65em;
         font-size: 0.78rem;
     }
-}
+}

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useRef, useState, Component } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import LaserFlow from "./LaserFlow";
 import Lanyard from "./Lanyard";
 import FoldText from "./FoldText";
@@ -70,6 +70,7 @@ const Hero = () => {
   const heroRef = useRef(null);
   const laserWrapRef = useRef(null);
   const [hasWebGL] = useState(() => checkWebGL());
+  const shouldReduceMotion = useReducedMotion();
 
   // Framer motion scroll values relative to hero section
   const { scrollYProgress } = useScroll({
@@ -88,6 +89,9 @@ const Hero = () => {
 
   // - LaserFlow fades gradually after the hero
   const laserOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const motionImageStyle = shouldReduceMotion ? {} : { scale: imageScale, x: imageX };
+  const motionTextStyle = shouldReduceMotion ? {} : { y: textY, opacity: textOpacity };
+  const laserStyle = shouldReduceMotion ? { zIndex: 4 } : { zIndex: 4, opacity: laserOpacity };
 
   return (
     <section id="home" ref={heroRef} className="hero-section">
@@ -95,7 +99,7 @@ const Hero = () => {
       <motion.div
         ref={laserWrapRef}
         className="homepage-laser-wrap"
-        style={{ zIndex: 4, opacity: laserOpacity }}
+        style={laserStyle}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -145,61 +149,94 @@ const Hero = () => {
       {/* Bordered content container */}
       <div className="homepage-content-border">
         <div className="homepage-content-inner">
-          <motion.div
-            className="hero-lanyard-container"
-            style={{ scale: imageScale, x: imageX }}
-          >
-            {hasWebGL ? (
-              <LanyardErrorBoundary fallback={<LanyardFallback />}>
-                <Lanyard
-                  position={[0, 0, 22]}
-                  gravity={[0, -40, 0]}
-                  frontImage="/mehak.jpeg"
-                  imageFit="cover"
-                />
-              </LanyardErrorBoundary>
-            ) : (
-              <LanyardFallback />
-            )}
-          </motion.div>
+          <div className="hero-visual-zone">
+            <p className="hero-identity" aria-label="Aspiring Full Stack Dev">
+              <span>Aspiring</span>
+              <span>Full Stack</span>
+              <span>Dev</span>
+            </p>
+
+            <motion.div
+              className="hero-lanyard-container"
+              style={motionImageStyle}
+            >
+              {hasWebGL ? (
+                <LanyardErrorBoundary fallback={<LanyardFallback />}>
+                  <Lanyard
+                    position={[0, 0, 22]}
+                    gravity={[0, -40, 0]}
+                    frontImage="/mehak.jpeg"
+                    imageFit="cover"
+                  />
+                </LanyardErrorBoundary>
+              ) : (
+                <LanyardFallback />
+              )}
+            </motion.div>
+          </div>
+
+          <div className="hero-divider" aria-hidden="true" />
 
           <motion.div
             className="homepage-welcome"
-            style={{ y: textY, opacity: textOpacity }}
+            style={motionTextStyle}
           >
-            <h1 className="homepage-welcome-title">
-              <FoldText
-                text="Hi, I'm Mehak!"
-                splitBy="char"
-                hinge="top"
-                trigger="mount"
-                duration={0.6}
-                stagger={0.04}
-                ease="power3.out"
-                perspective={700}
-                creaseShading={0.5}
-                fontSize="inherit"
-                fontWeight="inherit"
-                color="inherit"
+            <div className="hero-copy">
+              <p className="hero-kicker">01 / FULL STACK DEVELOPER</p>
+              <h1 className="homepage-welcome-title">
+                <FoldText
+                  text="Hi, I'm Mehak!"
+                  splitBy="char"
+                  hinge="top"
+                  trigger="mount"
+                  duration={5}
+                  stagger={0.065}
+                  ease="power3.out"
+                  perspective={700}
+                  creaseShading={0.5}
+                  fontSize="inherit"
+                  fontWeight="inherit"
+                  color="inherit"
+                />
+              </h1>
+              <p className="hero-statement">I BUILD DIGITAL EXPERIENCES.</p>
+              <WarpText
+                text="Full Stack Developer focused on building modern, responsive web applications, from intuitive interfaces to scalable backend systems."
+                color="#e2d9f3"
+                warpStrength={0.06}
+                warpScale={1.6}
+                speed={0.45}
+                pointerInfluence={0.38}
+                pointerStrength={0.32}
+                refraction={0.014}
+                ripple
+                fontSize="clamp(0.95rem, 1.3vw, 1.15rem)"
+                fontWeight={400}
+                fontFamily="inherit"
+                letterSpacing="0em"
+                lineHeight={1.6}
+                style={{ width: "min(100%, 600px)", height: "150px" }}
               />
-            </h1>
-            <WarpText
-              text="I'm a Full Stack Developer who enjoys building modern, responsive, and scalable web applications. From crafting intuitive user interfaces to developing robust backend systems, I love turning ideas into real-world products."
-              color="#e2d9f3"
-              warpStrength={0.06}
-              warpScale={1.6}
-              speed={0.45}
-              pointerInfluence={0.38}
-              pointerStrength={0.32}
-              refraction={0.014}
-              ripple
-              fontSize="clamp(1rem, 1.4vw, 1.2rem)"
-              fontWeight={400}
-              fontFamily="inherit"
-              letterSpacing="0em"
-              lineHeight={1.6}
-              style={{ width: "100%", height: "150px" }}
-            />
+            </div>
+
+            <div className="hero-actions" aria-label="Hero links">
+              <div className="hero-social-links">
+                <a href="https://github.com" target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+              </div>
+              <a
+                className="hero-resume-link"
+                href="/resume/MehakkResume75.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Resume
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>

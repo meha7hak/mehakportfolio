@@ -18,7 +18,14 @@
     0 10px 30px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(207, 158, 255, 0.15);
   max-width: 95vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-header::-webkit-scrollbar {
+  display: none;
 }
 
 .navbar-header.scrolled {
@@ -37,7 +44,7 @@
   .navbar-header {
     top: 0.5rem;
     padding: 0.2rem 0.5rem;
-    max-width: 98vw;
+    max-width: calc(100vw - 1rem);
   }
   .navbar-header.scrolled {
     top: 0.25rem;
