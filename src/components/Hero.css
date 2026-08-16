@@ -13,8 +13,11 @@
 
 .homepage-laser-wrap {
   position: absolute;
-  inset: 0;
-  z-index: 10;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: clamp(120px, 20vh, 210px);
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -162,8 +165,8 @@
 }
 
 .hero-lanyard-container {
-  width: min(100%, clamp(260px, 28vw, 440px));
-  height: clamp(360px, 52svh, 560px);
+  width: min(100%, clamp(300px, 32vw, 520px));
+  height: clamp(460px, 62svh, 680px);
   margin: 0;
   position: relative;
   overflow: visible;
@@ -234,8 +237,8 @@
   }
 
   .hero-lanyard-container {
-    width: min(100%, clamp(220px, 30vw, 330px));
-    height: clamp(320px, 48svh, 450px);
+    width: min(100%, clamp(260px, 34vw, 420px));
+    height: clamp(390px, 54svh, 560px);
   }
 
   .hero-statement {
@@ -284,9 +287,9 @@
   }
 
   .hero-lanyard-container {
-    width: min(72vw, 250px);
+    width: min(76vw, 300px);
     max-width: 100%;
-    height: clamp(220px, 64vw, 300px);
+    height: clamp(260px, 72vw, 360px);
     overflow: visible;
   }
 
@@ -385,8 +388,8 @@
   }
 
   .hero-lanyard-container {
-    width: min(70vw, 220px);
-    height: clamp(205px, 62vw, 250px);
+    width: min(74vw, 260px);
+    height: clamp(240px, 70vw, 320px);
   }
 
   .hero-actions {

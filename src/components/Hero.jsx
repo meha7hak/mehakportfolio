@@ -91,63 +91,63 @@ const Hero = () => {
   const laserOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const motionImageStyle = shouldReduceMotion ? {} : { scale: imageScale, x: imageX };
   const motionTextStyle = shouldReduceMotion ? {} : { y: textY, opacity: textOpacity };
-  const laserStyle = shouldReduceMotion ? { zIndex: 4 } : { zIndex: 4, opacity: laserOpacity };
+  const laserStyle = shouldReduceMotion ? { zIndex: 0 } : { zIndex: 0, opacity: laserOpacity };
 
   return (
     <section id="home" ref={heroRef} className="hero-section">
-      {/* 2. LaserFlow on top of particles, with image card inside its container */}
-      <motion.div
-        ref={laserWrapRef}
-        className="homepage-laser-wrap"
-        style={laserStyle}
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const el = laserWrapRef.current;
-          if (el) {
-            el.style.setProperty("--mx", `${x}px`);
-            el.style.setProperty("--my", `${y}px`);
-          }
-        }}
-        onMouseLeave={() => {
-          const el = laserWrapRef.current;
-          if (el) {
-            el.style.setProperty("--mx", "-9999px");
-            el.style.setProperty("--my", "-9999px");
-          }
-        }}
-      >
-        <LaserFlowErrorBoundary>
-          <LaserFlow
-            horizontalBeamOffset={0.0}
-            verticalBeamOffset={0.12}
-            color="#CF9EFF"
-            horizontalSizing={0.5}
-            verticalSizing={5}
-            wispDensity={1}
-            wispSpeed={15}
-            wispIntensity={5}
-            flowSpeed={0.35}
-            flowStrength={0.25}
-            fogIntensity={0.14}
-            fogScale={0.18}
-            fogFallSpeed={0.6}
-            decay={1.1}
-            falloffStart={1.2}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-            }}
-          />
-        </LaserFlowErrorBoundary>
-      </motion.div>
-
       {/* Bordered content container */}
       <div className="homepage-content-border">
+        {/* 2. LaserFlow layered at the hero border edge */}
+        <motion.div
+          ref={laserWrapRef}
+          className="homepage-laser-wrap"
+          style={laserStyle}
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const el = laserWrapRef.current;
+            if (el) {
+              el.style.setProperty("--mx", `${x}px`);
+              el.style.setProperty("--my", `${y}px`);
+            }
+          }}
+          onMouseLeave={() => {
+            const el = laserWrapRef.current;
+            if (el) {
+              el.style.setProperty("--mx", "-9999px");
+              el.style.setProperty("--my", "-9999px");
+            }
+          }}
+        >
+          <LaserFlowErrorBoundary>
+            <LaserFlow
+              horizontalBeamOffset={0.0}
+              verticalBeamOffset={0.12}
+              color="#CF9EFF"
+              horizontalSizing={0.5}
+              verticalSizing={5}
+              wispDensity={1}
+              wispSpeed={15}
+              wispIntensity={5}
+              flowSpeed={0.35}
+              flowStrength={0.25}
+              fogIntensity={0.14}
+              fogScale={0.18}
+              fogFallSpeed={0.6}
+              decay={1.1}
+              falloffStart={1.2}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+              }}
+            />
+          </LaserFlowErrorBoundary>
+        </motion.div>
+
         <div className="homepage-content-inner">
           <div className="hero-visual-zone">
             <p className="hero-identity" aria-label="Aspiring Full Stack Dev">
@@ -163,7 +163,7 @@ const Hero = () => {
               {hasWebGL ? (
                 <LanyardErrorBoundary fallback={<LanyardFallback />}>
                   <Lanyard
-                    position={[0, 0, 22]}
+                    position={[0, 0, 16]}
                     gravity={[0, -40, 0]}
                     frontImage="/mehak.jpeg"
                     imageFit="cover"
