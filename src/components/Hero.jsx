@@ -221,10 +221,10 @@ const Hero = () => {
 
             <div className="hero-actions" aria-label="Hero links">
               <div className="hero-social-links">
-                <a href="https://github.com" target="_blank" rel="noreferrer">
+                <a href="https://github.com/meha7hak" target="_blank" rel="noreferrer">
                   GitHub
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+                <a href="https://www.linkedin.com/in/mehak78/" target="_blank" rel="noreferrer">
                   LinkedIn
                 </a>
               </div>
